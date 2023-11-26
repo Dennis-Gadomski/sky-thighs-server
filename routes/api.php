@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\FlightLogController;
+use App\Http\Controllers\Api\V1\AirportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
+    Route::get('/airports/{ident}', [AirportController::class, 'getByIdent']);
+    Route::get('/flights/airports', [AirportController::class, 'getVisitedAirports']);
     Route::apiResource('/flights', FlightLogController::class);
+    Route::apiResource('/airports', AirportController::class);
 });
+
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

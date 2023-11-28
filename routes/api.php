@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
     Route::get('/airports/{ident}', [AirportController::class, 'getByIdent']);
-    Route::get('/flights/airports', [AirportController::class, 'getVisitedAirports']);
+    Route::get('/flights/unique-airports', [FlightLogController::class, 'getUniqueAirports']);
     Route::apiResource('/flights', FlightLogController::class);
     Route::apiResource('/airports', AirportController::class);
 });

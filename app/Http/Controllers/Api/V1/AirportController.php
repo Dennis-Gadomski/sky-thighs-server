@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AirportResource;
-use App\Models\Airport;
+use App\Services\AirportService;
 
 class AirportController extends Controller
 {
+    private $airportService;
+
+    public function __construct(AirportService $airportService)
+    {
+        $this->airportService = $airportService;
+    }
+
     public function getAllAirports()
     {
-        return AirportResource::collection(Airport::all());
+        return $this->airportService->getAllAirports();
     }
 
     public function getByIdent($ident)
     {
-        $airport = Airport::where('ident', $ident)->firstOrFail();
-        return new AirportResource($airport);
+        return $this->airportService->getByIdent($ident);
     }
 }

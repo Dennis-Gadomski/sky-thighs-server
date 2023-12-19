@@ -19,10 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('v1')->group(function () {
     Route::get('/airports/{ident}', [AirportController::class, 'getByIdent']);
     Route::get('/flights/unique-airports', [FlightLogController::class, 'getUniqueAirports']);
-    Route::apiResource('/flights', FlightLogController::class);
-    Route::apiResource('/airports', AirportController::class);
+    Route::get('/flights', [FlightLogController::class, 'getAllFlights']);
+    Route::get('/airports', [AirportController::class, 'getAllAirports']);
 });
-
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

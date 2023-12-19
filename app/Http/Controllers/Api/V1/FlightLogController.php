@@ -7,7 +7,6 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\FlightLogResource;
 use App\Models\FlightLog;
-use Illuminate\Support\Facades\Log;
 
 class FlightLogController extends Controller
 {

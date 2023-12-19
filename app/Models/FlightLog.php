@@ -16,8 +16,6 @@ class FlightLog extends Model
 
 
     protected $fillable = [
-        'id',
-        'pilotId',
         'createdAt',
         'updatedAt'
     ];

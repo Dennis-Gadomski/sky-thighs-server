@@ -21,6 +21,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/flights/unique-airports', [FlightLogController::class, 'getUniqueAirports']);
     Route::get('/flights', [FlightLogController::class, 'getAllFlights']);
     Route::get('/airports', [AirportController::class, 'getAllAirports']);
+
+    Route::post('/flights', [FlightLogController::class, 'saveFlight']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

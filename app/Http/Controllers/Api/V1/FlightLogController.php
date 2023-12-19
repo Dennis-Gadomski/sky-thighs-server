@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Services\FlightService;
+use Illuminate\Http\Request;
 
 class FlightLogController extends Controller
 {
@@ -23,5 +24,13 @@ class FlightLogController extends Controller
     public function getUniqueAirports()
     {
         return $this->flightService->getUniqueAirportsFromFlightLogs();
+    }
+
+    public function saveFlight(Request $request)
+    {
+        // TODO: add controller level validation
+        $savedFlight = $this->flightService->saveFlight($request);
+
+        return $savedFlight;
     }
 }

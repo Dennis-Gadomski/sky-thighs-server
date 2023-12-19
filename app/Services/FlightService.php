@@ -4,9 +4,19 @@ namespace App\Services;
 
 use App\Http\Resources\FlightLogResource;
 use App\Models\FlightLog;
+use Illuminate\Support\Carbon;
 
 class FlightService
 {
+
+    protected $nanoIdService;
+
+    public function __construct(NanoIdService $nanoIdService)
+    {
+        $this->nanoIdService = $nanoIdService;
+    }
+
+
     public function getAllFlights()
     {
         return FlightLogResource::collection(FlightLog::all());
@@ -46,5 +56,31 @@ class FlightService
             }
         }
         return response()->json($combinedCounts->values());
+    }
+
+    public function saveFlight($data)
+    {
+        $jsonData = $data->all();
+        $flight = new FlightLog();
+
+        // TODO: implement service level validation
+        foreach ($jsonData as $key => $value) {
+            $flight->$key = $value;
+
+            if (!$flight->fstdType) {
+                $flight->fstdType = "";
+            }
+
+            if (!$flight->remarks) {
+                $flight->remarks = "";
+            }
+        }
+        $flight->id = $this->nanoIdService->generateNanoId();
+        $now = Carbon::now();
+        $flight->createdAt = $now;
+        $flight->updatedAt = $now;
+        $flight->save();
+
+        return $flight;
     }
 }

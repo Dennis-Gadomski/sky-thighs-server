@@ -16,7 +16,32 @@ class FlightLog extends Model
 
 
     protected $fillable = [
+        'pilotId',
         'createdAt',
-        'updatedAt'
+        'updatedAt',
+        'date',
+        'departurePlace',
+        'departureTime',
+        'arrivalPlace',
+        'arrivalTime',
+        'aircraft',
+        'aircraftRegistration',
+        'SE',
+        'ME',
+        'multiPilotTime',
+        'flightTime',
+        'flightTimePic',
+        'flightTimeCP',
+        'flightTimeDual',
+        'flightTimeInstructor',
+        'picName',
+        'dayLanding',
+        'nightLanding',
+        'octNight',
+        'octIFR',
+        'fstdDate',
+        'fstdType',
+        'fstdTime',
+        'remarks',
     ];
 }

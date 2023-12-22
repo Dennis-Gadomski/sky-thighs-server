@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Http\Resources\FlightLogResource;
 use App\Models\FlightLog;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Carbon;
 
 class FlightService
@@ -56,6 +57,19 @@ class FlightService
             }
         }
         return response()->json($combinedCounts->values());
+    }
+
+    public function getFlightById($id)
+    {
+        try {
+            $flight = FlightLog::where('id', $id)->firstOrFail();
+            return $flight;
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'error' => 'Flight not found',
+                'message' => 'No flight found with the provided ID.'
+            ], 404);
+        }
     }
 
     public function saveFlight($data)

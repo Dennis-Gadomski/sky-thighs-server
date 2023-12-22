@@ -17,10 +17,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function () {
-    Route::get('/airports/{ident}', [AirportController::class, 'getByIdent']);
     Route::get('/flights/unique-airports', [FlightLogController::class, 'getUniqueAirports']);
     Route::get('/flights', [FlightLogController::class, 'getAllFlights']);
+    Route::get('/flights/{id}', [FlightLogController::class, 'getFlightById']);
+
     Route::get('/airports', [AirportController::class, 'getAllAirports']);
+    Route::get('/airports/{ident}', [AirportController::class, 'getByIdent']);
 
     Route::post('/flights', [FlightLogController::class, 'saveFlight']);
 });

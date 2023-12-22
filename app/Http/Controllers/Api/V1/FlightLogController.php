@@ -21,6 +21,11 @@ class FlightLogController extends Controller
         return $this->flightService->getAllFlights();
     }
 
+    public function getFlightById($id)
+    {
+        return $this->flightService->getFlightById($id);
+    }
+
     public function getUniqueAirports()
     {
         return $this->flightService->getUniqueAirportsFromFlightLogs();

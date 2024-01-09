@@ -25,6 +25,8 @@ Route::prefix('v1')->group(function () {
     Route::get('/airports/{ident}', [AirportController::class, 'getByIdent']);
 
     Route::post('/flights', [FlightLogController::class, 'saveFlight']);
+
+    Route::put('/flights/{id}', [FlightLogController::class, 'updateFlight']);
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

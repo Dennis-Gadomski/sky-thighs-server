@@ -38,4 +38,11 @@ class FlightLogController extends Controller
 
         return $savedFlight;
     }
+
+    public function updateFlight($id, Request $request)
+    {
+        $updatedFlight = $this->flightService->updateFlight($id, $request);
+
+        return $updatedFlight;
+    }
 }

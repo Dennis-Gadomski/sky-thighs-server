@@ -97,4 +97,35 @@ class FlightService
 
         return $flight;
     }
+
+    public function updateFlight($id, $data)
+    {
+        try {
+            $flight = FlightLog::findOrFail($id);
+
+            $jsonData = $data->all();
+
+            foreach ($jsonData as $key => $value) {
+                $flight->$key = $value;
+
+                if (!$flight->fstdType) {
+                    $flight->fstdType = "";
+                }
+
+                if (!$flight->remarks) {
+                    $flight->remarks = "";
+                }
+            }
+
+            $flight->updatedAt = Carbon::now();
+            $flight->save();
+
+            return $flight;
+        } catch (ModelNotFoundException $e) {
+            return response()->json([
+                'error' => 'Flight not found',
+                'message' => 'No flight found with the provided ID.'
+            ], 404);
+        }
+    }
 }
